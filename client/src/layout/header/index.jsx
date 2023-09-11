@@ -11,7 +11,8 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const pages = ["Home", "Fleet", "Contact"];
 const settings = ["Profile", "Logout"];
@@ -19,6 +20,8 @@ const settings = ["Profile", "Logout"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,8 +45,9 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component={Link} // Use Link component for Home
-            to="/" // Specify the destination path for Home
+            component={Link}
+            ü
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -91,8 +95,14 @@ function Header() {
                 <MenuItem
                   key={page}
                   onClick={handleCloseNavMenu}
-                  component={Link} 
-                  to={`/${page.toLowerCase()}`} 
+                  component={Link}
+                  to={`/${page.toLowerCase()}`}
+                  sx={{
+                    color:
+                      currentPath === `/${page.toLowerCase()}`
+                        ? "#0B0909"
+                        : "#445067",
+                  }}
                 >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -102,8 +112,8 @@ function Header() {
           <Typography
             variant="h5"
             noWrap
-            component={Link} 
-            to="/" 
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -126,27 +136,32 @@ function Header() {
             }}
           >
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                component={Link}
-                to={`/${page.toLowerCase()}`}
-                sx={{
-                  my: 2,
-                  color: "#445067",
-                  display: "block",
-                  marginRight: "3%",
-                  borderRadius: 15,
-                  "&:hover": {
-                    color: "#0B0909",
-                    borderRadius: 15,
-                    backgroundColor: "#F0F1CF",
-                  },
-                }}
-              >
-                {page}
-              </Button>
-            ))}
+  <Button
+    key={page}
+    component={Link}
+    to={`/${page.toLowerCase()}`}
+    sx={{
+      my: 2,
+      color: currentPath === `/${page.toLowerCase()}` ? "#0B0909" : "#445067",
+      display: "block",
+      marginRight: "3%",
+      borderRadius: 15,
+      textDecoration: "none",
+      borderBottom:
+        currentPath === `/${page.toLowerCase()}`
+          ? "2px solid #0B0909" 
+          : "none",
+      "&:hover": {
+        color: "#0B0909",
+        borderRadius: 15,
+        backgroundColor: "#F0F1CF",
+      },
+    }}
+  >
+    {page}
+  </Button>
+))}
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

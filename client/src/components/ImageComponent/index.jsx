@@ -5,7 +5,7 @@ function ImageComponent() {
   return (
     <div className="image-container">
       <img
-        src="https://papers.co/wallpaper/papers.co-no06-audi-car-interior-dark-bw-29-wallpaper.jpg"
+        src="https://e0.pxfuel.com/wallpapers/900/613/desktop-wallpaper-city-road-high-quality-resolution-city-road-road-city.jpg"
         alt="Background"
         className="background-image"
       />

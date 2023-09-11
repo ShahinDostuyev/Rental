@@ -6,9 +6,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 function SearchBar() {
-  const [showDates, setShowDates] = useState(false); // State to control date inputs visibility
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [showDates, setShowDates] = useState(false); 
 
   const formik = useFormik({
     initialValues: {

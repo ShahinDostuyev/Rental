@@ -32,6 +32,43 @@ const carController = {
       res.json(user.ownedCars);
     } catch (error) {}
   },
+  getCarByParams: async (req, res) => {
+    try {
+      const { carClass, startDate, endDate, minPrice, maxPrice } = req.params;
+  
+      if (!carClass || !startDate || !endDate || !minPrice || !maxPrice) {
+        return res.status(400).json({ error: "Invalid parameters" });
+      }
+  
+      const startDateObj = new Date(startDate);
+      const endDateObj = new Date(endDate);
+  
+      const car = await Car.findOne({
+        carClass,
+        price: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) },
+      });
+  
+      if (!car) {
+        return res.status(404).json({ error: "Car not found" });
+      }
+  
+      const reservations = await Reservation.find({
+        car: car._id,
+        startDate: { $lte: endDateObj },
+        endDate: { $gte: startDateObj },
+      });
+  
+      if (reservations.length > 0) {
+        return res.status(400).json({ error: "Car is already reserved for the specified dates" });
+      }
+  
+      res.json(car);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  },
+  
   addCar: async (req, res) => {
     try {
       const {

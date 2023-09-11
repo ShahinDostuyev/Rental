@@ -6,7 +6,7 @@ const CarSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "WebUser",
     },
-    carType: {
+    carClass: {
       type: String,
       required: true,
     },
@@ -63,6 +63,4 @@ const CarSchema = new Schema(
 
 const Car = mongoose.model("Car", CarSchema);
 
-module.exports = {
-  Car,
-};
+module.exports = { Car };
