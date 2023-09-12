@@ -53,24 +53,24 @@ export default function Fleet() {
   const cars = [
     {
       imageUrl: "https://www.topgear.com/sites/default/files/2022/07/6_0.jpg",
-      price: 20,
+      price: 250,
       date: new Date(),
       model: "Bmw IX",
       mileage: 1000,
     },
     {
-      imageUrl: "https://www.topgear.com/sites/default/files/2022/07/6_0.jpg",
-      price: 20,
+      imageUrl: "https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FUSION_2020.png",
+      price: 40,
       date: new Date(),
-      model: "Bmw IX",
-      mileage: 1000,
+      model: "Ford Fusion",
+      mileage: 56000,
     },
     {
-      imageUrl: "https://www.topgear.com/sites/default/files/2022/07/6_0.jpg",
-      price: 20,
+      imageUrl: "https://www.usnews.com/cmsmedia/12/be/5c7f3dfb4a12ab0795a9ba8144b5/2023-acura-integra-a-spec-2.jpg",
+      price: 160,
       date: new Date(),
-      model: "Bmw IX",
-      mileage: 1000,
+      model: "Acura NSX",
+      mileage: 34000,
     },
     {
       imageUrl: "https://www.topgear.com/sites/default/files/2022/07/6_0.jpg",
@@ -118,7 +118,7 @@ export default function Fleet() {
 
   return (
     <Layout>
-      <div style={{backgroundColor: "#F0F1CF",}}>
+      <div style={{backgroundColor: "#d8d8d8",}}>
       {/* <div style={{ width: "70%", margin: "auto" }}>
         <form onSubmit={formik.handleSubmit}>
           <TextField

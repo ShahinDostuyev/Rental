@@ -13,11 +13,20 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const pages = ["Home", "Fleet", "Contact"];
 const settings = ["Profile", "Logout"];
 
 function Header() {
+  const { loggedIn,user,handlerLogInOut } = useContext(AuthContext);
+
+  // const user = useSelector((state) => state.user);
+  // console.log(user);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const location = useLocation();
@@ -132,40 +141,44 @@ function Header() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "flex-end",
-              marginRight: "10%",
+              paddingRight: "10%",
             }}
           >
             {pages.map((page) => (
-  <Button
-    key={page}
-    component={Link}
-    to={`/${page.toLowerCase()}`}
-    sx={{
-      my: 2,
-      color: currentPath === `/${page.toLowerCase()}` ? "#0B0909" : "#445067",
-      display: "block",
-      marginRight: "3%",
-      borderRadius: 15,
-      textDecoration: "none",
-      borderBottom:
-        currentPath === `/${page.toLowerCase()}`
-          ? "2px solid #0B0909" 
-          : "none",
-      "&:hover": {
-        color: "#0B0909",
-        borderRadius: 15,
-        backgroundColor: "#F0F1CF",
-      },
-    }}
-  >
-    {page}
-  </Button>
-))}
-
+              <Button
+                key={page}
+                component={Link}
+                to={`/${page.toLowerCase()}`}
+                sx={{
+                  my: 2,
+                  color:
+                    currentPath === `/${page.toLowerCase()}`
+                      ? "#0B0909"
+                      : "#445067",
+                  display: "block",
+                  marginRight: "3%",
+                  borderRadius: 15,
+                  textDecoration: "none",
+                  borderBottom:
+                    currentPath === `/${page.toLowerCase()}`
+                      ? "2px solid #0B0909"
+                      : "none",
+                  "&:hover": {
+                    color: "#0B0909",
+                    borderRadius: 15,
+                    backgroundColor: "#d8d8d8",
+                  },
+                }}
+              >
+                {page}
+              </Button>
+            ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            {
+              loggedIn ? <>
+              <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Remy Sharp"
@@ -195,7 +208,35 @@ function Header() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu></> : <Button
+                component={Link}
+                to="/signin"
+                sx={{
+                  width:"3rem",
+                  my: 2,
+                  color:
+                    currentPath === "signin"
+                      ? "#0B0909"
+                      : "#445067",
+                  display: "block",
+                  marginRight: "3%",
+                  borderRadius: 15,
+                  textDecoration: "none",
+                  borderBottom:
+                    currentPath === "/signin"
+                      ? "2px solid #0B0909"
+                      : "none",
+                  "&:hover": {
+                    color: "#0B0909",
+                    borderRadius: 15,
+                    backgroundColor: "#d8d8d8",
+                  },
+                }}
+              >
+               Sign in
+              </Button>
+            }
+            
           </Box>
         </Toolbar>
       </Container>

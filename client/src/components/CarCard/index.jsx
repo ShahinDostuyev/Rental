@@ -25,8 +25,7 @@ export default function MultipleInteractionCard({carInfo}) {
           aria-label="Like minimal photography"
           size="md"
           variant="solid"
-          color={isFavorited ? "danger" : "primary"} // Change the color based on favorited state
-          // Change the color based on favorited state
+          color={isFavorited ? "danger" : "primary"} 
           sx={{
             position: 'absolute',
             zIndex: 2,

@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
   const [showDates, setShowDates] = useState(false); 
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       carClass: "",
@@ -39,6 +40,8 @@ function SearchBar() {
     }),
     onSubmit: (values) => {
       console.log(values);
+      navigate('/fleet');
+
     },
   });
 
@@ -47,10 +50,13 @@ function SearchBar() {
     setShowDates(!!e.target.value);
   };
 
+  // const handleClick  = () =>{
+ 
+  // }
   return (
     <Box
       sx={{
-        backgroundColor: "#F0F1CF",
+        backgroundColor: "#d8d8d8",
         margin: "auto",
         padding: "2rem",
         borderRadius: "10px",
@@ -158,6 +164,7 @@ function SearchBar() {
             <Button
               type="submit"
               variant="contained"
+              // onClick={handleClick}
               sx={{
                 marginTop: "1rem",
                 backgroundColor: "#9EBCF3",
@@ -170,7 +177,7 @@ function SearchBar() {
                 },
               }}
             >
-              Submit
+              Find vehicles
             </Button>
           </div>
         </form>
